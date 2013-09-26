@@ -40,9 +40,9 @@ Attributes
 |                              |        |             |*  ``GIVEN_NAME``                                  |
 |                              |        |             |*  ``SHARED_CONTACTS``                             |
 |                              |        |             |*  ``GROUPS``                                      |
-|``[:gads][:google][:exclude]``| Array  |             || ``{:match => 'USER_NAME',``                      |
-|                              |        |             || ``:type =>  'EXACT',``                           |
-|                              |        |             || ``:filter => 'foo@bar.com'},``                   |
+|``[:gads][:google][:exclude]``| Array  |             |``{:match => 'USER_NAME',``                        |
+|                              |        |             |``:type =>  'EXACT',``                             |
+|                              |        |             |``:filter => 'foo@bar.com'},``                     |
 +------------------------------+--------+-------------+---------------------------------------------------+
 
 Usage
