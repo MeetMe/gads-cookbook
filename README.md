@@ -21,12 +21,12 @@ Attributes
     <th>Default</th>
   </tr>
 <tr><td><tt>[:gads][:download_url]</tt></td><td>String</td><td></td><td><tt>http://dl.google.com/dirsync/dirsync-linux64.sh</tt></td></tr>
-<tr><td><tt>[:gads][:create_symlinks]</tt></td><td>String</td><td></td><td><tt>true</tt></td></tr>
+<tr><td><tt>[:gads][:create_symlinks]</tt></td><td>Boolean</td><td></td><td><tt>true</tt></td></tr>
 <tr><td><tt>[:gads][:install_path]</tt></td><td>String</td><td></td><td><tt>/opt/GoogleAppsDirSync</tt></td></tr>
 <tr><td><tt>[:gads][:synlinks_path]</tt></td><td>String</td><td></td><td><tt>/usr/local/bin</tt></td></tr>
 <tr><td><tt>[:gads][:config_path]</tt></td><td>String</td><td></td><td><tt>/usr/local/etc/gads.xml</tt></td></tr>
 <tr><td><tt>[:gads][:config_version]</tt></td><td>String</td><td></td><td><tt>3.1.6</tt></td></tr>
-tr><td><tt>[:gads][:features]</tt></td><td>String</td><td></td><td>
+tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
  - CACHE_PASSWORD_TIMESTAMPS
  - ALIAS_SYNCHRONIZATION
  - USER_PROFILES
@@ -45,30 +45,30 @@ tr><td><tt>[:gads][:features]</tt></td><td>String</td><td></td><td>
  - GROUPS
 </tt></td></tr>
 <tr><td><tt>[:gads][:logging][:file]</tt></td><td>String</td><td></td><td><tt>/var/log/google/gads.log</tt></td></tr>
-<tr><td><tt>[:gads][:logging][:format]</tt></td><td>String</td><td></td><td><tt>[%d{ISO8601}]</tt></td></tr> [%t] [%p] [%C{3}] %m%n'
+<tr><td><tt>[:gads][:logging][:format]</tt></td><td>String</td><td></td><td><tt>[%d{ISO8601}] [%t] [%p] [%C{3}] %m%n</tt></td></tr>
 <tr><td><tt>[:gads][:logging][:level]</tt></td><td>String</td><td></td><td><tt>INFO</tt></td></tr>
-<tr><td><tt>[:gads][:logging][:max_bytes]</tt></td><td>String</td><td></td><td><tt>4294967296</tt></td></tr>
-<tr><td><tt>[:gads][:logging][:max_files]</tt></td><td>String</td><td></td><td><tt>1</tt></td></tr>
+<tr><td><tt>[:gads][:logging][:max_bytes]</tt></td><td>Number</td><td></td><td><tt>4294967296</tt></td></tr>
+<tr><td><tt>[:gads][:logging][:max_files]</tt></td><td>Number</td><td></td><td><tt>1</tt></td></tr>
 <tr><td><tt>[:gads][:notification][:smtp_relay]</tt></td><td>String</td><td></td><td><tt>localhost</tt></td></tr>
 <tr><td><tt>[:gads][:notification][:from_address]</tt></td><td>String</td><td></td><td><tt>gads@yourdomain.com</tt></td></tr>
 <tr><td><tt>[:gads][:notification][:to_address]</tt></td><td>String</td><td></td><td><tt>you@yourdomain.com</tt></td></tr>
-<tr><td><tt>[:gads][:notification][:ignore_errors]</tt></td><td>String</td><td></td><td><tt>false</tt></td></tr>
-<tr><td><tt>[:gads][:notification][:ignore_info]</tt></td><td>String</td><td></td><td><tt>false</tt></td></tr>
-<tr><td><tt>[:gads][:notification][:ignore_warnings]</tt></td><td>String</td><td></td><td><tt>false</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:delete_calendar_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:delete_contact_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:delete_group_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:delete_ou_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:delete_user_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:limit][:suspend_user_percent]</tt></td><td>String</td><td></td><td><tt>5</tt></td></tr>
-<tr><td><tt>[:gads][:cache_lifetime]</tt></td><td>String</td><td></td><td><tt>691200</tt></td></tr>
+<tr><td><tt>[:gads][:notification][:ignore_errors]</tt></td><td>Boolean</td><td></td><td><tt>false</tt></td></tr>
+<tr><td><tt>[:gads][:notification][:ignore_info]</tt></td><td>Boolean</td><td></td><td><tt>false</tt></td></tr>
+<tr><td><tt>[:gads][:notification][:ignore_warnings]</tt></td><td>Boolean</td><td></td><td><tt>false</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:delete_calendar_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:delete_contact_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:delete_group_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:delete_ou_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:delete_user_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:limit][:suspend_user_percent]</tt></td><td>Number</td><td></td><td><tt>5</tt></td></tr>
+<tr><td><tt>[:gads][:cache_lifetime]</tt></td><td>Number</td><td></td><td><tt>691200</tt></td></tr>
 <tr><td><tt>[:gads][:google][:admin_email]</tt></td><td>String</td><td></td><td><tt>you@your-gapps-domain.com</tt></td></tr>
 <tr><td><tt>[:gads][:google][:admin_password]</tt></td><td>String</td><td></td><td><tt>your-password-value</tt></td></tr>
 <tr><td><tt>[:gads][:google][:domain]</tt></td><td>String</td><td></td><td><tt>your-gapps-domain.com</tt></td></tr>
-<tr><td><tt>[:gads][:google][:threads][:contact_sync]</tt></td><td>String</td><td></td><td><tt>15</tt></td></tr>
-<tr><td><tt>[:gads][:google][:threads][:profile_sync]</tt></td><td>String</td><td></td><td><tt>30</tt></td></tr>
-<tr><td><tt>[:gads][:google][:threads][:user_sync]</tt></td><td>String</td><td></td><td><tt>30</tt></td></tr>
-<tr><td><tt>[:gads][:google][:exclude]</tt></td><td>String</td><td>Exclude List -- set as a role attribute, valid values for match and type are in the Google Apps admin guide</td><td>
+<tr><td><tt>[:gads][:google][:threads][:contact_sync]</tt></td><td>Number</td><td></td><td><tt>15</tt></td></tr>
+<tr><td><tt>[:gads][:google][:threads][:profile_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
+<tr><td><tt>[:gads][:google][:threads][:user_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
+<tr><td><tt>[:gads][:google][:exclude]</tt></td><td>Array</td><td>Exclude List -- set as a role attribute, valid values for match and type are in the Google Apps admin guide</td><td>
    {:match => 'USER_NAME',
     :type =>  'EXACT',
     :filter => 'foo@bar.com'},
@@ -83,7 +83,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>String</td><td></td><td>
 <tr><td><tt>[:gads][:ldap][:type]</tt></td><td>String</td><td></td><td><tt>OPENLDAP</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:connect_method]</tt></td><td>String</td><td></td><td><tt>STANDARD</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:hostname]</tt></td><td>String</td><td></td><td><tt>your-ldap-server</tt></td></tr>
-<tr><td><tt>[:gads][:ldap][:port]</tt></td><td>String</td><td></td><td><tt>389</tt></td></tr>
+<tr><td><tt>[:gads][:ldap][:port]</tt></td><td>Number</td><td></td><td><tt>389</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:basedn]</tt></td><td>String</td><td></td><td><tt>dc=foo,dc=com</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:auth_type]</tt></td><td>String</td><td></td><td><tt>SIMPLE</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:auth_user]</tt></td><td>String</td><td></td><td><tt>cn=Manager,dc=foo,dc=com</tt></td></tr>
@@ -95,9 +95,9 @@ tr><td><tt>[:gads][:features]</tt></td><td>String</td><td></td><td>
 <tr><td><tt>[:gads][:ldap][:attr][:family_name]</tt></td><td>String</td><td></td><td><tt>sn</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:attr][:sha1_password]</tt></td><td>String</td><td></td><td><tt>userPassword</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:attr][:password_last_set]</tt></td><td>String</td><td></td><td><tt>pwdChangedTime</tt></td></tr>
-<tr><td><tt>[:gads][:ldap][:generated_password_length]</tt></td><td>String</td><td></td><td><tt>8</tt></td></tr>
-<tr><td><tt>[:gads][:ldap][:results_page_size]</tt></td><td>String</td><td></td><td><tt>1000</tt></td></tr>
-<tr><td><tt>[:gads][:ldap][:groups][:search][:priority]</tt></td><td>String</td><td></td><td><tt>1</tt></td></tr>
+<tr><td><tt>[:gads][:ldap][:generated_password_length]</tt></td><td>Number</td><td></td><td><tt>8</tt></td></tr>
+<tr><td><tt>[:gads][:ldap][:results_page_size]</tt></td><td>Number</td><td></td><td><tt>1000</tt></td></tr>
+<tr><td><tt>[:gads][:ldap][:groups][:search][:priority]</tt></td><td>Number</td><td></td><td><tt>1</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:groups][:search][:basedn]</tt></td><td>String</td><td></td><td><tt>"ou=Groups,#{node[:gads][:ldap][:basedn]}"</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:groups][:search][:scope]</tt></td><td>String</td><td></td><td><tt>SUBTREE</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:groups][:search][:filter]</tt></td><td>String</td><td></td><td><tt>objectClass=groupOfNames</tt></td></tr>
