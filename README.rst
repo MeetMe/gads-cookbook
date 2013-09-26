@@ -4,15 +4,17 @@ Installs and configures Google Apps Directory Sync in a Linux environment
 
 Requirements
 ------------
-The gads::default cookbook will install the one dependency gem, greenletters which is used to automate interaction with the installation script and the password encryption script.
+The `gads::default` cookbook will install the one dependency gem, greenletters which is used to automate interaction with the installation script and the password encryption script.
 
-#### cookbooks
+**cookbooks**
+
 - `java` - Java is required to run Google App Directory Sync. The gads::default recipe installs using the default behavior. Include java in your runlist prior to gads if you want to change the install behavior.
 
 Attributes
 ----------
 
-#### gads::default
+**gads::default**
+
 +------------------------------+--------+-------------+-------------------------------------------------+
 | Key                          | Type   | Description | Default                                         |
 +------------------------------+--------+-------------+-------------------------------------------------+
@@ -42,7 +44,7 @@ Attributes
 
 Usage
 -----
-#### gads::default
+**gads::default**
 
 Just include `gads` in your node's `run_list`:
 
@@ -78,8 +80,8 @@ Installation will toggle node attributes that control subsequent runs:
   </tr>
 </table>
 
- - If you update your password or configuration, you will need to set the [:run_flags][:gads_passwords_encrypted] value to False in the node attributes overrides for the configuration to be updated.
- - If you want to install a GADS version update, you will need to set the [:run_flags][:gads_installed] value to False to download and install the new version.
+- If you update your password or configuration, you will need to set the [:run_flags][:gads_passwords_encrypted] value to False in the node attributes overrides for the configuration to be updated.
+- If you want to install a GADS version update, you will need to set the [:run_flags][:gads_installed] value to False to download and install the new version.
 
 License and Authors
 -------------------
