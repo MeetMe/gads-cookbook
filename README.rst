@@ -25,24 +25,21 @@ Attributes
 |``[:gads][:config_path]``     | String |             |``/usr/local/etc/gads.xml``                        |
 |``[:gads][:config_version]``  | String |             |``3.1.6``                                          |
 |``[:gads][:features]``        | Array  |             |* ``CACHE_PASSWORD_TIMESTAMPS``                    |
-|                              |        |             |*  ``ALIAS_SYNCHRONIZATION``                       |
-|                              |        |             |*  ``USER_PROFILES``                               |
-|                              |        |             |*  ``SKIP_CALENDAR_RESOURCES``                     |
-|                              |        |             |*  ``GROUP_DESCRIPTION``                           |
-|                              |        |             |*  ``GROUP_OWNER``                                 |
-|                              |        |             |*  ``SUSPEND_USERS``                               |
-|                              |        |             |*  ``NON_ADDRESS_PRIMARY_KEY``                     |
-|                              |        |             |*  ``GOOGLE_ORGUNITS``                             |
-|                              |        |             |*  ``SHA1_PASSWORD``                               |
-|                              |        |             |*  ``MULTIDOMAIN``                                 |
-|                              |        |             |*  ``SKIP_SUSPENDING_ADMINS``                      |
-|                              |        |             |*  ``FAMILY_NAME``                                 |
-|                              |        |             |*  ``GIVEN_NAME``                                  |
-|                              |        |             |*  ``SHARED_CONTACTS``                             |
-|                              |        |             |*  ``GROUPS``                                      |
-|``[:gads][:google][:exclude]``| Array  |             |``{:match => 'USER_NAME',``                        |
-|                              |        |             |``:type =>  'EXACT',``                             |
-|                              |        |             |``:filter => 'foo@bar.com'},``                     |
+|                              |        |             |* ``ALIAS_SYNCHRONIZATION``                        |
+|                              |        |             |* ``USER_PROFILES``                                |
+|                              |        |             |* ``SKIP_CALENDAR_RESOURCES``                      |
+|                              |        |             |* ``GROUP_DESCRIPTION``                            |
+|                              |        |             |* ``GROUP_OWNER``                                  |
+|                              |        |             |* ``SUSPEND_USERS``                                |
+|                              |        |             |* ``NON_ADDRESS_PRIMARY_KEY``                      |
+|                              |        |             |* ``GOOGLE_ORGUNITS``                              |
+|                              |        |             |* ``SHA1_PASSWORD``                                |
+|                              |        |             |* ``MULTIDOMAIN``                                  |
+|                              |        |             |* ``SKIP_SUSPENDING_ADMINS``                       |
+|                              |        |             |* ``FAMILY_NAME``                                  |
+|                              |        |             |* ``GIVEN_NAME``                                   |
+|                              |        |             |* ``SHARED_CONTACTS``                              |
+|                              |        |             |* ``GROUPS``                                       |
 +------------------------------+--------+-------------+---------------------------------------------------+
 
 Usage
