@@ -26,7 +26,9 @@ Attributes
 <tr><td><tt>[:gads][:synlinks_path]</tt></td><td>String</td><td></td><td><tt>/usr/local/bin</tt></td></tr>
 <tr><td><tt>[:gads][:config_path]</tt></td><td>String</td><td></td><td><tt>/usr/local/etc/gads.xml</tt></td></tr>
 <tr><td><tt>[:gads][:config_version]</tt></td><td>String</td><td></td><td><tt>3.1.6</tt></td></tr>
-tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
+tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td>
+<td>
+
  - CACHE_PASSWORD_TIMESTAMPS
  - ALIAS_SYNCHRONIZATION
  - USER_PROFILES
@@ -43,6 +45,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
  - GIVEN_NAME
  - SHARED_CONTACTS
  - GROUPS
+
 </tt></td></tr>
 <tr><td><tt>[:gads][:logging][:file]</tt></td><td>String</td><td></td><td><tt>/var/log/google/gads.log</tt></td></tr>
 <tr><td><tt>[:gads][:logging][:format]</tt></td><td>String</td><td></td><td><tt>[%d{ISO8601}] [%t] [%p] [%C{3}] %m%n</tt></td></tr>
