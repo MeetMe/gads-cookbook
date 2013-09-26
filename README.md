@@ -28,25 +28,23 @@ Attributes
 <tr><td><tt>[:gads][:config_version]</tt></td><td>String</td><td></td><td><tt>3.1.6</tt></td></tr>
 tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td>
 <td>
-
-- CACHE_PASSWORD_TIMESTAMPS
-- ALIAS_SYNCHRONIZATION
-- USER_PROFILES
-- SKIP_CALENDAR_RESOURCES
-- GROUP_DESCRIPTION
-- GROUP_OWNER
-- SUSPEND_USERS
-- NON_ADDRESS_PRIMARY_KEY
-- GOOGLE_ORGUNITS
-- SHA1_PASSWORD
-- MULTIDOMAIN
-- SKIP_SUSPENDING_ADMINS
-- FAMILY_NAME
-- GIVEN_NAME
-- SHARED_CONTACTS
-- GROUPS
-
-</tt></td></tr>
+CACHE_PASSWORD_TIMESTAMPS
+ALIAS_SYNCHRONIZATION
+USER_PROFILES
+SKIP_CALENDAR_RESOURCES
+GROUP_DESCRIPTION
+GROUP_OWNER
+SUSPEND_USERS
+NON_ADDRESS_PRIMARY_KEY
+GOOGLE_ORGUNITS
+SHA1_PASSWORD
+MULTIDOMAIN
+SKIP_SUSPENDING_ADMINS
+FAMILY_NAME
+GIVEN_NAME
+SHARED_CONTACTS
+GROUPS
+</td></tr>
 <tr><td><tt>[:gads][:logging][:file]</tt></td><td>String</td><td></td><td><tt>/var/log/google/gads.log</tt></td></tr>
 <tr><td><tt>[:gads][:logging][:format]</tt></td><td>String</td><td></td><td><tt>[%d{ISO8601}] [%t] [%p] [%C{3}] %m%n</tt></td></tr>
 <tr><td><tt>[:gads][:logging][:level]</tt></td><td>String</td><td></td><td><tt>INFO</tt></td></tr>
@@ -71,7 +69,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td>
 <tr><td><tt>[:gads][:google][:threads][:contact_sync]</tt></td><td>Number</td><td></td><td><tt>15</tt></td></tr>
 <tr><td><tt>[:gads][:google][:threads][:profile_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
 <tr><td><tt>[:gads][:google][:threads][:user_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
-<tr><td><tt>[:gads][:google][:exclude]</tt></td><td>Array</td><td>Exclude List, set as a role attribute, valid values for match and type are in the Google Apps admin guide</td><td>
+<tr><td><tt>[:gads][:google][:exclude]</tt></td><td>Array</td><td>Exclude List, set as a role attribute, valid values for match and type are in the Google Apps admin guide</td><td><tt>
 
    {:match => 'USER_NAME',
     :type =>  'EXACT',
@@ -83,7 +81,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td>
     :type => 'EXACT',
     :filter => 'gapps-only-group@your-gapps-domain.com'}
 
-</td></tr>
+</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:type]</tt></td><td>String</td><td></td><td><tt>OPENLDAP</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:connect_method]</tt></td><td>String</td><td></td><td><tt>STANDARD</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:hostname]</tt></td><td>String</td><td></td><td><tt>your-ldap-server</tt></td></tr>
