@@ -15,36 +15,39 @@ Attributes
 
 **gads::default**
 
-+---------------------------+--------+-------------+---------------------------------------------------+
-| Key                       | Type   | Description | Default                                           |
-+===========================+========+=============+===================================================+
-| [:gads][:download_url]    | String |             | http://dl.google.com/dirsync/dirsync-linux64.sh   |
-+---------------------------+--------+-------------+---------------------------------------------------+
-| [:gads][:create_symlinks] | Boolean|             | true                                              |
-+---------------------------+--------+-------------+---------------------------------------------------+
-| [:gads][:install_path]    | String |             | /opt/GoogleAppsDirSync                            |
-+---------------------------+--------+-------------+---------------------------------------------------+
-| [:gads][:synlinks_path]   | String |             | /usr/local/bin                                    |
-+---------------------------+--------+-------------+---------------------------------------------------+
-| [:gads][:config_path]     | String |             | /usr/local/etc/gads.xml                           |
-+---------------------------+--------+-------------+---------------------------------------------------+
-| [:gads][:features]        | Array  |             | * CACHE_PASSWORD_TIMESTAMPS                       |
-|                           |        |             | * ALIAS_SYNCHRONIZATION                           |
-|                           |        |             | * USER_PROFILES                                   |
-|                           |        |             | * SKIP_CALENDAR_RESOURCES                         |
-|                           |        |             | * GROUP_DESCRIPTION                               |
-|                           |        |             | * GROUP_OWNER                                     |
-|                           |        |             | * SUSPEND_USERS                                   |
-|                           |        |             | * NON_ADDRESS_PRIMARY_KEY                         |
-|                           |        |             | * GOOGLE_ORGUNITS                                 |
-|                           |        |             | * SHA1_PASSWORD                                   |
-|                           |        |             | * MULTIDOMAIN                                     |
-|                           |        |             | * SKIP_SUSPENDING_ADMINS                          |
-|                           |        |             | * FAMILY_NAME                                     |
-|                           |        |             | * GIVEN_NAME                                      |
-|                           |        |             | * SHARED_CONTACTS                                 |
-|                           |        |             | * GROUPS                                          |
-+---------------------------+--------+-------------+---------------------------------------------------+
++----------------------------+--------+-------------+---------------------------------------------------+
+| Key                        | Type   | Description | Default                                           |
++============================+========+=============+===================================================+
+| [:gads][:download_url]     | String |             | http://dl.google.com/dirsync/dirsync-linux64.sh   |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:create_symlinks]  | Boolean|             | true                                              |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:install_path]     | String |             | /opt/GoogleAppsDirSync                            |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:synlinks_path]    | String |             | /usr/local/bin                                    |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:config_path]      | String |             | /usr/local/etc/gads.xml                           |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:features]         | Array  |             | * CACHE_PASSWORD_TIMESTAMPS                       |
+|                            |        |             | * ALIAS_SYNCHRONIZATION                           |
+|                            |        |             | * USER_PROFILES                                   |
+|                            |        |             | * SKIP_CALENDAR_RESOURCES                         |
+|                            |        |             | * GROUP_DESCRIPTION                               |
+|                            |        |             | * GROUP_OWNER                                     |
+|                            |        |             | * SUSPEND_USERS                                   |
+|                            |        |             | * NON_ADDRESS_PRIMARY_KEY                         |
+|                            |        |             | * GOOGLE_ORGUNITS                                 |
+|                            |        |             | * SHA1_PASSWORD                                   |
+|                            |        |             | * MULTIDOMAIN                                     |
+|                            |        |             | * SKIP_SUSPENDING_ADMINS                          |
+|                            |        |             | * FAMILY_NAME                                     |
+|                            |        |             | * GIVEN_NAME                                      |
+|                            |        |             | * SHARED_CONTACTS                                 |
+|                            |        |             | * GROUPS                                          |
++----------------------------+--------+-------------+---------------------------------------------------+
+| [:gads][:google][:exclude] | Array  |             | {:match => 'USER_NAME',                           |
+|                            |        |             |  :type =>  'EXACT',                               |
++----------------------------+--------+-------------+---------------------------------------------------+
 
 Usage
 -----
