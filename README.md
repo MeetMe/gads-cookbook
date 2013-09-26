@@ -27,6 +27,7 @@ Attributes
 <tr><td><tt>[:gads][:config_path]</tt></td><td>String</td><td></td><td><tt>/usr/local/etc/gads.xml</tt></td></tr>
 <tr><td><tt>[:gads][:config_version]</tt></td><td>String</td><td></td><td><tt>3.1.6</tt></td></tr>
 tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
+
 ```ruby
 %w[CACHE_PASSWORD_TIMESTAMPS
    ALIAS_SYNCHRONIZATION
@@ -45,6 +46,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
    SHARED_CONTACTS
    GROUPS]
 ```
+
 </td></tr>
 <tr><td><tt>[:gads][:logging][:file]</tt></td><td>String</td><td></td><td><tt>/var/log/google/gads.log</tt></td></tr>
 <tr><td><tt>[:gads][:logging][:format]</tt></td><td>String</td><td></td><td><tt>[%d{ISO8601}] [%t] [%p] [%C{3}] %m%n</tt></td></tr>
@@ -71,6 +73,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
 <tr><td><tt>[:gads][:google][:threads][:profile_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
 <tr><td><tt>[:gads][:google][:threads][:user_sync]</tt></td><td>Number</td><td></td><td><tt>30</tt></td></tr>
 <tr><td><tt>[:gads][:google][:exclude]</tt></td><td>Array</td><td>Exclude List, set as a role attribute, valid values for match and type are in the Google Apps admin guide</td><td><tt>
+
 ```ruby
    {:match => 'USER_NAME',
     :type =>  'EXACT',
@@ -82,6 +85,7 @@ tr><td><tt>[:gads][:features]</tt></td><td>Array</td><td></td><td>
     :type => 'EXACT',
     :filter => 'gapps-only-group@your-gapps-domain.com'}
 ```
+
 </tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:type]</tt></td><td>String</td><td></td><td><tt>OPENLDAP</tt></td></tr>
 <tr><td><tt>[:gads][:ldap][:connect_method]</tt></td><td>String</td><td></td><td><tt>STANDARD</tt></td></tr>
