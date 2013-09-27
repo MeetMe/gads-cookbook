@@ -95,7 +95,9 @@ Attributes
 +---------------------------------------------------------+---------+----------------------------------------------------------------------------------+
 | [:gads][:google][:threads][:user_sync]                  | Number  | 30                                                                               |
 +---------------------------------------------------------+---------+----------------------------------------------------------------------------------+
-| [:gads][:config_id]                                     | Unknown | Digest::MD5.hexdigest(node[:gads][:google][:domain])                             |
+| [:gads][:config_id]                                     | String  | Digest::MD5.hexdigest(node[:gads][:google][:domain])                           * |
++---------------------------------------------------------+---------+----------------------------------------------------------------------------------+
+| [:gads][:google][:exclude]                              | Array   | [] - See Usage information for this data structure                               |
 +---------------------------------------------------------+---------+----------------------------------------------------------------------------------+
 | [:gads][:ldap][:type]                                   | String  | OPENLDAP                                                                         |
 +---------------------------------------------------------+---------+----------------------------------------------------------------------------------+
@@ -229,28 +231,35 @@ Just include `gads` in your node's `run_list`:
 }
 ```
 
+**Managing the exclusion list**
+
+The exclusion list is managed with the [:gads][:google][:exclude] Array. In the array, is a :Hash with three keys: ``:match``, ``:type``, and ``:filter``. For an explanation of the exclude behavior and types, see the Google Apps for Domains documentation.
+
+Example::
+
+```ruby
+   [{:match => 'USER_NAME',
+     :type =>  'EXACT',
+     :filter => 'foo@bar.com'},
+    {:match => 'USER_NAME',
+     :type => 'SUBSTRING',
+     :filter => 'txt.att.net'},
+    {:match => 'GROUP_NAME',
+     :type => 'EXACT',
+     :filter => 'gapps-only-group@your-gapps-domain.com'}]
+```
+
+**Run control**
+
 Installation will toggle node attributes that control subsequent runs:
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>[:run_flags][:gads_passwords_encrypted]`|
-    <td>Boolean</td>
-    <td>If true, will prevent the configuration template from updating and re-encrypting passwords.</td>
-    <td><tt>true</tt>* after the first run
-  </tr>
-  <tr>
-    <td><tt>[:run_flags][:gads_installed]`|
-    <td>Boolean</td>
-    <td>If true, will prevent gads from being re-downloaded and re-installed.</td>
-    <td><tt>true</tt>* after the first run
-  </tr>
-</table>
++-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
+| Key                                     | Type    | Description                                                                                 | Value |
++-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
+| [:run_flags][:gads_installed]           | Boolean | If true, will prevent gads from being re-downloaded and re-installed.                       | true* |
++-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
+| [:run_flags][:gads_passwords_encrypted] | Boolean | If true, will prevent the configuration template from updating and re-encrypting passwords. | true* |
++-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
 
 - If you update your password or configuration, you will need to set the [:run_flags][:gads_passwords_encrypted] value to False in the node attributes overrides for the configuration to be updated.
 - If you want to install a GADS version update, you will need to set the [:run_flags][:gads_installed] value to False to download and install the new version.
