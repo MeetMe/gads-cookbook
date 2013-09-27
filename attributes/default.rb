@@ -61,20 +61,19 @@ default[:gads][:google][:threads][:user_sync] = 30
 
 # Make the config id the md5 of the domain
 require 'digest/md5'
-default[:gads][:config_id] =  Digest::MD5.hexdigest(node[:gads][:google][:domain])
+default[:gads][:config_id] = Digest::MD5.hexdigest(node[:gads][:google][:domain])
 
 # Exclude List -- set as a role attribute, valid values for match and type are in the Google Apps admin guide
-default[:gads][:google][:exclude] = [
-  {:match => 'USER_NAME',
-   :type =>  'EXACT',
-   :filter => 'foo@bar.com'},
-  {:match => 'USER_NAME',
-   :type => 'SUBSTRING',
-   :filter => 'txt.att.net'},
-  {:match => 'GROUP_NAME',
-   :type => 'EXACT',
-   :filter => 'gapps-only-group@your-gapps-domain.com'}
-]
+default[:gads][:google][:exclude] = []
+#  {:match => 'USER_NAME',
+#   :type =>  'EXACT',
+#   :filter => 'foo@bar.com'},
+#  {:match => 'USER_NAME',
+#   :type => 'SUBSTRING',
+#   :filter => 'txt.att.net'},
+#  {:match => 'GROUP_NAME',
+#   :type => 'EXACT',
+#   :filter => 'gapps-only-group@your-gapps-domain.com'}]
 
 # LDAP Settings
 default[:gads][:ldap][:type] = 'OPENLDAP'
