@@ -1,14 +1,14 @@
 Google Apps Directory Sync Cookbook
 ===================================
-Installs and configures Google Apps Directory Sync in a Linux environment
+Installs and configures Google Apps Directory Sync in a Linux environment. In addition, will perform the encryption steps required in the latest versions of Google Apps for Domains Sync.
 
 Requirements
 ------------
-The `gads::default` cookbook will install the one dependency gem, greenletters which is used to automate interaction with the installation script and the password encryption script.
+The ``gads::default`` cookbook will install the one dependency gem, ``greenletters`` which is used to automate interaction with the installation script and the password encryption script.
 
 **cookbooks**
 
-- `java` - Java is required to run Google App Directory Sync. The gads::default recipe installs using the default behavior. Include java in your runlist prior to gads if you want to change the install behavior.
+* java: Java is required to run Google App Directory Sync. The ``gads::default`` recipe installs using the default behavior. Include java in your runlist prior to gads if you want to change the install behavior.
 
 Attributes
 ----------
@@ -220,24 +220,26 @@ Usage
 -----
 **gads::default**
 
-Just include `gads` in your node's `run_list`:
+Just include gads and java in your node's ``run_list``:
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[gads]"
-  ]
-}
-```
+.. code-block:: python
+
+    {
+      "name": "my_node",
+      "run_list": [
+        "recipe[java]"
+        "recipe[gads]"
+      ]
+    }
 
 **Managing the exclusion list**
 
-The exclusion list is managed with the [:gads][:google][:exclude] Array. In the array, is a :Hash with three keys: ``:match``, ``:type``, and ``:filter``. For an explanation of the exclude behavior and types, see the Google Apps for Domains documentation.
+The exclusion list is managed with the ``[:gads][:google][:exclude]`` Array. In the array, is a :Hash with three keys: ``:match``, ``:type``, and ``:filter``. For an explanation of the exclude behavior and types, see the Google Apps for Domains documentation.
 
-Example::
+Example:
 
-```ruby
+.. code-block:: python
+
    [{:match => 'USER_NAME',
      :type =>  'EXACT',
      :filter => 'foo@bar.com'},
@@ -247,7 +249,6 @@ Example::
     {:match => 'GROUP_NAME',
      :type => 'EXACT',
      :filter => 'gapps-only-group@your-gapps-domain.com'}]
-```
 
 **Run control**
 
@@ -261,8 +262,8 @@ Installation will toggle node attributes that control subsequent runs:
 | [:run_flags][:gads_passwords_encrypted] | Boolean | If true, will prevent the configuration template from updating and re-encrypting passwords. | true* |
 +-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
 
-- If you update your password or configuration, you will need to set the [:run_flags][:gads_passwords_encrypted] value to False in the node attributes overrides for the configuration to be updated.
-- If you want to install a GADS version update, you will need to set the [:run_flags][:gads_installed] value to False to download and install the new version.
+- If you update your password or configuration, you will need to set the ``[:run_flags][:gads_passwords_encrypted]`` value to ``false`` in the node attributes overrides for the configuration to be updated.
+- If you want to install a GADS version update, you will need to set the ``[:run_flags][:gads_installed]`` value to ``false`` to download and install the new version.
 
 License and Authors
 -------------------
