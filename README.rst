@@ -254,13 +254,13 @@ Example:
 
 Installation will toggle node attributes that control subsequent runs:
 
-+-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
-| Key                                     | Type    | Description                                                                                 | Value |
-+-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
-| [:run_flags][:gads_installed]           | Boolean | If true, will prevent gads from being re-downloaded and re-installed.                       | true* |
-+-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
-| [:run_flags][:gads_passwords_encrypted] | Boolean | If true, will prevent the configuration template from updating and re-encrypting passwords. | true* |
-+-----------------------------------------+---------+---------------------------------------------------------------------------------------------+-------+
++---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
+| Key                                         | Type    | Description                                                                                 | Value     |
++=============================================+=========+=============================================================================================+===========+
+| ``[:run_flags][:gads_installed]``           | Boolean | If true, will prevent gads from being re-downloaded and re-installed.                       | ``true``* |
++---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
+| ``[:run_flags][:gads_passwords_encrypted]`` | Boolean | If true, will prevent the configuration template from updating and re-encrypting passwords. | ``true``* |
++---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
 
 - If you update your password or configuration, you will need to set the ``[:run_flags][:gads_passwords_encrypted]`` value to ``false`` in the node attributes overrides for the configuration to be updated.
 - If you want to install a GADS version update, you will need to set the ``[:run_flags][:gads_installed]`` value to ``false`` to download and install the new version.
