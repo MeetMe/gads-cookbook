@@ -65,7 +65,7 @@ ruby_block 'install-gads' do
 
     node.set[:run_flags][:gads_installed] = true
   end
-  notifies :run, "ruby_block[encrypt_config]"
+  notifies :create, "ruby_block[encrypt_config]"
 end
 
 template node[:gads][:config_path] do
@@ -125,7 +125,7 @@ remote_file installer_path do
   action :nothing
   source node[:gads][:download_url]
   mode   0744
-  notifies :run, 'ruby_block[install-gads]'
+  notifies :create, 'ruby_block[install-gads]'
 end
 
 # Required for the interactive installation and encryption
