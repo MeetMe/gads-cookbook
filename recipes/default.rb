@@ -13,9 +13,9 @@ user 'gads' do
 end
 
 ruby_block 'install-gads' do
-  action :nothing
   only_if {File::exists?(installer_path)}
   not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_installed] }
+  action :nothing
   block do
     require 'greenletters'
 
@@ -65,7 +65,7 @@ ruby_block 'install-gads' do
 
     node.set[:run_flags][:gads_installed] = true
   end
-  notifies :create, "ruby_block[encrypt_config]"
+  notifies :run, "ruby_block[encrypt_config]"
 end
 
 template node[:gads][:config_path] do
@@ -121,16 +121,14 @@ end
 
 # Download and install the GADs installer if it's not already been done
 remote_file installer_path do
+  not_if {File::exists?(installer_path)}
   not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_installed] }
-  action :nothing
   source node[:gads][:download_url]
   mode   0744
-  notifies :create, 'ruby_block[install-gads]'
   notifies :run, 'ruby_block[install-gads]'
 end
 
 # Required for the interactive installation and encryption
 chef_gem 'greenletters' do
-  notifies :create, "remote_file[#{installer_path}]", :immediately
-  notifies :run, "remote_file[#{installer_path}]", :immediately
+  action :install
 end
