@@ -126,9 +126,11 @@ remote_file installer_path do
   source node[:gads][:download_url]
   mode   0744
   notifies :create, 'ruby_block[install-gads]'
+  notifies :run, 'ruby_block[install-gads]'
 end
 
 # Required for the interactive installation and encryption
 chef_gem 'greenletters' do
   notifies :create, "remote_file[#{installer_path}]", :immediately
+  notifies :run, "remote_file[#{installer_path}]", :immediately
 end
