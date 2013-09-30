@@ -5,7 +5,7 @@ default[:gads][:install_path] = '/opt/GoogleAppsDirSync'
 default[:gads][:synlinks_path] = '/usr/local/bin'
 default[:gads][:config_path] = '/usr/local/etc/gads.xml'
 
-default[:gads][:config_version] = '3.1.6'
+default[:gads][:config_version] = '3.2.1'
 
 # Features
 default[:gads][:features] = %w[CACHE_PASSWORD_TIMESTAMPS
