@@ -14,7 +14,7 @@ end
 
 ruby_block 'install-gads' do
   only_if {File::exists?(installer_path)}
-  not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_installed] }
+  not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_installed) && node[:run_flags][:gads_installed] }
   action :nothing
   block do
     require 'greenletters'
@@ -69,7 +69,7 @@ ruby_block 'install-gads' do
 end
 
 template node[:gads][:config_path] do
-  not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_pwds_encrypted] }
+  not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_passwords_encrypted) && node[:run_flags][:gads_passwords_encrypted] }
   action :create
   source 'gads.xml.erb'
   owner  'gads'
@@ -78,7 +78,7 @@ end
 
 ruby_block 'encrypt_config' do
   action :nothing
-  not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_pwds_encrypted] }
+  not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_passwords_encrypted) && node[:run_flags][:gads_passwords_encrypted] }
   block do
     require 'greenletters'
 
@@ -122,7 +122,7 @@ end
 # Download and install the GADs installer if it's not already been done
 remote_file installer_path do
   not_if {File::exists?(installer_path)}
-  not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_installed] }
+  not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_installed) && node[:run_flags][:gads_installed] }
   source node[:gads][:download_url]
   mode   0744
   notifies :run, 'ruby_block[install-gads]'
