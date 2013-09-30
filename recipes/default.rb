@@ -65,6 +65,7 @@ ruby_block 'install-gads' do
 
     node.set[:run_flags][:gads_installed] = true
   end
+  notifies :run, "ruby_block[encrypt_config]"
 end
 
 template node[:gads][:config_path] do
@@ -76,6 +77,7 @@ template node[:gads][:config_path] do
 end
 
 ruby_block 'encrypt_config' do
+  action :nothing
   not_if { node.attribute?(:run_flags) && node.attribute?(:run_flags) && node[:run_flags][:gads_pwds_encrypted] }
   block do
     require 'greenletters'
