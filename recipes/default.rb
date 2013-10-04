@@ -80,36 +80,12 @@ ruby_block 'encrypt_config' do
   action :nothing
   not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_passwords_encrypted) && node[:run_flags][:gads_passwords_encrypted] }
   block do
-    require 'greenletters'
 
-    # The output line that has the password
-    encrypted_output = /Encrypted\svalue\s\(case\ssensitive,\splease\scut\sand paste\)\:\s([\w\S]+)/i
-
-    # Encrypt the admin password
-    encrypt_auth = Greenletters::Process.new("#{node[:gads][:install_path]}/encrypt-util -c #{node[:gads][:config_path]}",
-                                             :timeout => 10, :transcript => $stdout)
-    encrypt_auth.on(:output, encrypted_output) do |process, match_data|
-      # Unfortunately I could not find the match group in match_data
-      encrypted = match_data.matched.match(encrypted_output)
-      node.override[:gads][:google][:admin_password] = encrypted[1]
-    end
-    encrypt_auth.start!
-    encrypt_auth.wait_for(:output, /Please enter the value to encrypt for the specified config/i)
-    encrypt_auth << "encryptedAdminPassword\n"
-    encrypt_auth.wait_for(:exit)
+    # Encrypt the Google Admin password
+    node.force_override[:gads][:google][:admin_password] = GADS.encrypted_value('encryptedAdminPassword')
 
     # Encrypt the LDAP password
-    encrypt_ldap = Greenletters::Process.new("#{node[:gads][:install_path]}/encrypt-util -c #{node[:gads][:config_path]}",
-                                             :timeout => 10, :transcript => $stdout)
-    encrypt_ldap.on(:output, encrypted_output) do |process, match_data|
-      # Unfortunately I could not find the match group in match_data
-      encrypted = match_data.matched.match(encrypted_output)
-      node.override[:gads][:ldap][:auth_password] = encrypted[1]
-    end
-    encrypt_ldap.start!
-    encrypt_ldap.wait_for(:output, /Please enter the value to encrypt for the specified config/i)
-    encrypt_ldap << "authCredentialsEncrypted\n"
-    encrypt_ldap.wait_for(:exit)
+    node.force_override[:gads][:google][:admin_password] = GADS.encrypted_value('authCredentialsEncrypted')
 
     # Set the flag that passwords have been encrypted
     node.set[:run_flags][:gads_passwords_encrypted] = true
