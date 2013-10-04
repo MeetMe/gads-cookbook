@@ -119,6 +119,17 @@ ruby_block 'encrypt_config' do
   notifies :create, "template[#{node[:gads][:config_path]}]"
 end
 
+# A template stanza for if gads is installed but the encrypt_config flag is set to false (for config changes)
+template node[:gads][:config_path] do
+  not_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_passwords_encrypted) && node[:run_flags][:gads_passwords_encrypted] }
+  only_if { node.attribute?(:run_flags) && node[:run_flags].attribute?(:gads_installed) && node[:run_flags][:gads_installed] }
+  action :create
+  source 'gads.xml.erb'
+  owner  'gads'
+  mode   0644
+  notifies :run, "ruby_block[encrypt_config]"
+end
+
 # Download and install the GADs installer if it's not already been done
 remote_file installer_path do
   not_if {File::exists?(installer_path)}
