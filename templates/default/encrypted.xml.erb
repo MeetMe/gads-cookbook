@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created by Chef for <%= node[:fqdn] %> -->
-<config version="<%= node[:gads][:config_version] %>" id="<%= node[:gads][:config_id] %>" rev="b55f1799d65e42818dbb05166c1184ac" marker="314">
+<config version="<%= @gads_version %>" id="<%= node[:gads][:config_id] %>" rev="<%= @config_hash %>" marker="314">
   <features>
     <% node[:gads][:features].each do |value| %>
-    <optional><%= value %></optional><% end %>
+    <optional><%= value %></optional>
+    <% end %>
   </features>
   <logging>
     <defaultLogLevel><%= node[:gads][:logging][:level] %></defaultLogLevel>
@@ -35,7 +36,7 @@
         <config version="0.2">
           <adminEmail><%= node[:gads][:google][:admin_email] %></adminEmail>
           <domain><%= node[:gads][:google][:domain] %></domain>
-          <encryptedAdminPassword><%= node[:gads][:google][:admin_password] %></encryptedAdminPassword>
+          <encryptedAdminPassword><%= @admin_password %></encryptedAdminPassword>
           <loginMethod>CLIENTLOGIN</loginMethod>
           <googleUsersSyncThreads><%= node[:gads][:google][:threads][:user_sync] %></googleUsersSyncThreads>
           <googleProfilesSyncThreads><%= node[:gads][:google][:threads][:profile_sync] %></googleProfilesSyncThreads>
@@ -62,7 +63,7 @@
           <basedn><%= node[:gads][:ldap][:basedn] %></basedn>
           <authType><%= node[:gads][:ldap][:auth_type] %></authType>
           <authUser><%= node[:gads][:ldap][:auth_user] %></authUser>
-          <authCredentialsEncrypted><%= node[:gads][:ldap][:auth_password] %></authCredentialsEncrypted>
+          <authCredentialsEncrypted><%= @ldap_password %></authCredentialsEncrypted>
           <nonAddressPrimaryKeyAttrName><%= node[:gads][:ldap][:primary_key] %></nonAddressPrimaryKeyAttrName>
           <emailAttrName><%= node[:gads][:ldap][:attr][:email] %></emailAttrName>
           <aliasAttrName><%= node[:gads][:ldap][:attr][:email_alias] %></aliasAttrName>

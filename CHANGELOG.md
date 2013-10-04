@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of gads.
 
+## 0.2.0:
+
+* Refactor substantially
+
 ## 0.1.0:
 
 * Initial release of gads

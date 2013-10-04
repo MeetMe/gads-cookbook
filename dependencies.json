@@ -1,0 +1,10 @@
+{
+    "cookbooks": {
+        "java": {
+            "url": "git://github.com/opscode-cookbooks/java.git"
+        },
+        "run_once": {
+            "url": "git://github.com/MeetMe/run_once.git"
+        }
+    }
+}

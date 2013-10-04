@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by Chef for <%= node[:fqdn] %> -->
+<config version="<%= @gads_version %>" id="<%= node[:gads][:config_id] %>" rev="<%= @config_hash %>" marker="314">
+  <features>
+    <% node[:gads][:features].each do |value| %>
+    <optional><%= value %></optional>
+    <% end %>
+  </features>
+  <logging>
+    <defaultLogLevel><%= node[:gads][:logging][:level] %></defaultLogLevel>
+    <format><%= node[:gads][:logging][:format] %></format>
+    <logFile><%= node[:gads][:logging][:file] %></logFile>
+    <maximumLogBytes><%= node[:gads][:logging][:max_bytes] %></maximumLogBytes>
+    <logFileCount><%= node[:gads][:logging][:max_files] %></logFileCount>
+  </logging>
+  <notification>
+    <smtpRelay><%= node[:gads][:notification][:smtp_relay] %></smtpRelay>
+    <fromAddress><%= node[:gads][:notification][:from_address] %></fromAddress>
+    <toAddress><%= node[:gads][:notification][:to_address] %></toAddress>
+    <ignoreRetrievalErrors><%= node[:gads][:notification][:ignore_errors] %></ignoreRetrievalErrors>
+    <ignoreRetrievalInfo><%= node[:gads][:notification][:ignore_info] %></ignoreRetrievalInfo>
+    <ignoreRetrievalWarnings><%= node[:gads][:notification][:ignore_warnings] %></ignoreRetrievalWarnings>
+  </notification>
+  <eventLimits>
+    <deleteCalendarResourceLimitPCT><%= node[:gads][:limit][:delete_calendar_percent] %></deleteCalendarResourceLimitPCT>
+    <deleteGroupLimitPCT><%= node[:gads][:limit][:delete_group_percent] %></deleteGroupLimitPCT>
+    <deleteOrgunitLimitPCT><%= node[:gads][:limit][:delete_ou_percent] %></deleteOrgunitLimitPCT>
+    <deleteSharedContactLimitPCT><%= node[:gads][:limit][:delete_contact_percent] %></deleteSharedContactLimitPCT>
+    <deleteUserLimitPCT><%= node[:gads][:limit][:delete_user_percent] %></deleteUserLimitPCT>
+    <suspendUserLimitPCT><%= node[:gads][:limit][:suspend_user_percent] %></suspendUserLimitPCT>
+  </eventLimits>
+  <maxCacheLifetime><%= node[:gads][:cache_lifetime] %></maxCacheLifetime>
+  <plugins>
+    <remote>
+      <plugin class="com.google.usersyncapp.plugin.google.GooglePlugin">
+        <config version="0.2">
+          <adminEmail><%= node[:gads][:google][:admin_email] %></adminEmail>
+          <domain><%= node[:gads][:google][:domain] %></domain>
+          <encryptedAdminPassword><%= node[:gads][:google][:admin_password] %></encryptedAdminPassword>
+          <loginMethod>CLIENTLOGIN</loginMethod>
+          <googleUsersSyncThreads><%= node[:gads][:google][:threads][:user_sync] %></googleUsersSyncThreads>
+          <googleProfilesSyncThreads><%= node[:gads][:google][:threads][:profile_sync] %></googleProfilesSyncThreads>
+          <googleContactsSyncThreads><%= node[:gads][:google][:threads][:contact_sync] %></googleContactsSyncThreads>
+          <nonAddressPrimaryKeyMapFile>nonAddressPrimaryKeyFile.tsv</nonAddressPrimaryKeyMapFile>
+          <passwordTimestampFile>passwordTimestampCache.tsv</passwordTimestampFile>
+          <% node[:gads][:google][:exclude].each do |entry| %>
+          <exclude>
+            <match><%= entry[:match] %></match>
+            <type><%= entry[:type] %></type>
+            <filter><%= entry[:filter] %></filter>
+          </exclude>
+          <% end %>
+        </config>
+      </plugin>
+    </remote>
+    <local>
+      <plugin class="com.google.usersyncapp.plugin.ldap.LDAPPlugin">
+        <config version="0.2">
+          <serverType><%= node[:gads][:ldap][:type] %></serverType>
+          <connectMethod><%= node[:gads][:ldap][:connect_method] %></connectMethod>
+          <hostname><%= node[:gads][:ldap][:hostname] %></hostname>
+          <port><%= node[:gads][:ldap][:port] %></port>
+          <basedn><%= node[:gads][:ldap][:basedn] %></basedn>
+          <authType><%= node[:gads][:ldap][:auth_type] %></authType>
+          <authUser><%= node[:gads][:ldap][:auth_user] %></authUser>
+          <authCredentialsEncrypted><%= node[:gads][:ldap][:auth_password] %></authCredentialsEncrypted>
+          <nonAddressPrimaryKeyAttrName><%= node[:gads][:ldap][:primary_key] %></nonAddressPrimaryKeyAttrName>
+          <emailAttrName><%= node[:gads][:ldap][:attr][:email] %></emailAttrName>
+          <aliasAttrName><%= node[:gads][:ldap][:attr][:email_alias] %></aliasAttrName>
+          <givenNameAttrName><%= node[:gads][:ldap][:attr][:given_name] %></givenNameAttrName>
+          <familyNameAttrName><%= node[:gads][:ldap][:attr][:family_name] %></familyNameAttrName>
+          <sha1PasswordAttrName><%= node[:gads][:ldap][:attr][:sha1_password] %></sha1PasswordAttrName>
+          <passwordLastSetAttrName><%= node[:gads][:ldap][:attr][:password_last_set] %></passwordLastSetAttrName>
+          <generatedPasswordLength><%= node[:gads][:ldap][:generated_password_length] %></generatedPasswordLength>
+          <resultsPageSize><%= node[:gads][:ldap][:results_page_size] %></resultsPageSize>
+          <dominoWhiteSpaceReplaceChar>.</dominoWhiteSpaceReplaceChar>
+          <orgunits>
+            <mapping>
+              <dn><%= node[:gads][:ldap][:orgunits][:mapping][:dn] %></dn>
+              <name><%= node[:gads][:ldap][:orgunits][:mapping][:name] %></name>
+            </mapping>
+            <search>
+              <priority><%= node[:gads][:ldap][:orgunits][:search][:priority] %></priority>
+              <basedn><%= node[:gads][:ldap][:orgunits][:search][:basedn] %></basedn>
+              <scope><%= node[:gads][:ldap][:orgunits][:search][:scope] %></scope>
+              <filter><%= node[:gads][:ldap][:orgunits][:search][:filter] %></filter>
+              <descriptionAttrName><%= node[:gads][:ldap][:orgunits][:search][:attr][:description] %></descriptionAttrName>
+            </search>
+          </orgunits>
+          <users>
+            <search>
+              <priority><%= node[:gads][:ldap][:users][:search][:priority] %></priority>
+              <basedn><%= node[:gads][:ldap][:users][:search][:basedn] %></basedn>
+              <suspended><%= node[:gads][:ldap][:users][:search][:suspended] %></suspended>
+              <scope><%= node[:gads][:ldap][:users][:search][:scope] %></scope>
+              <orgMappingAttribute><%= node[:gads][:ldap][:users][:search][:attr][:org_mapping] %></orgMappingAttribute>
+              <filter><%= node[:gads][:ldap][:users][:search][:filter] %></filter>
+            </search>
+          </users>
+          <groups>
+            <search>
+              <priority><%= node[:gads][:ldap][:groups][:search][:priority] %></priority>
+              <basedn><%= node[:gads][:ldap][:groups][:search][:basedn] %></basedn>
+              <scope><%= node[:gads][:ldap][:groups][:search][:scope] %></scope>
+              <filter><%= node[:gads][:ldap][:groups][:search][:filter] %></filter>
+              <memberAttrName><%= node[:gads][:ldap][:groups][:search][:attr][:member] %></memberAttrName>
+              <groupIdentifierAttr><%= node[:gads][:ldap][:groups][:search][:attr][:name] %></groupIdentifierAttr>
+              <groupDisplayNameAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:display_name] %></groupDisplayNameAttribute>
+              <groupDescriptionAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:description] %></groupDescriptionAttribute>
+              <ownerDnAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:owner_dn] %></ownerDnAttribute>
+            </search>
+          </groups>
+          <sharedContacts>
+            <search>
+              <priority><%= node[:gads][:ldap][:users][:search][:priority] %></priority>
+              <basedn><%= node[:gads][:ldap][:users][:search][:basedn] %></basedn>
+              <scope><%= node[:gads][:ldap][:users][:search][:scope] %></scope>
+              <filter><%= node[:gads][:ldap][:users][:search][:filter] %></filter>
+              <companyNameAttrName><%= node[:gads][:ldap][:users][:search][:attr][:company_name] %></companyNameAttrName>
+              <departmentAttrName><%= node[:gads][:ldap][:users][:search][:attr][:department] %></departmentAttrName>
+              <jobTitleAttrName><%= node[:gads][:ldap][:users][:search][:attr][:title] %></jobTitleAttrName>
+              <fullNameAttrName><%= node[:gads][:ldap][:users][:search][:attr][:full_name] %></fullNameAttrName>
+              <assistantAttrName><%= node[:gads][:ldap][:users][:search][:attr][:assistant] %></assistantAttrName>
+              <managerAttrName><%= node[:gads][:ldap][:users][:search][:attr][:manager] %></managerAttrName>
+              <syncKeyAttrName><%= node[:gads][:ldap][:users][:search][:attr][:sync_key] %></syncKeyAttrName>
+              <workAddressStreetAttrName><%= node[:gads][:ldap][:users][:search][:attr][:street_address] %></workAddressStreetAttrName>
+              <workAddressPoboxAttrName><%= node[:gads][:ldap][:users][:search][:attr][:pobox] %></workAddressPoboxAttrName>
+              <workAddressCityAttrName><%= node[:gads][:ldap][:users][:search][:attr][:city] %></workAddressCityAttrName>
+              <workAddressStateAttrName><%= node[:gads][:ldap][:users][:search][:attr][:state] %></workAddressStateAttrName>
+              <workAddressPostalCodeAttrName><%= node[:gads][:ldap][:users][:search][:attr][:postal_code] %></workAddressPostalCodeAttrName>
+              <workEmailAddressesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:email] %></workEmailAddressesAttrName>
+              <employeeIdsAttrName><%= node[:gads][:ldap][:users][:search][:attr][:employee_id] %></employeeIdsAttrName>
+              <faxNumbersAttrName><%= node[:gads][:ldap][:users][:search][:attr][:fax] %></faxNumbersAttrName>
+              <homePhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:home_phone] %></homePhonesAttrName>
+              <mobilePhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:mobile_phone] %></mobilePhonesAttrName>
+              <workPhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:work_phone] %></workPhonesAttrName>
+            </search>
+          </sharedContacts>
+          <userProfiles>
+            <search>
+              <priority><%= node[:gads][:ldap][:users][:search][:priority] %></priority>
+              <basedn><%= node[:gads][:ldap][:users][:search][:basedn] %></basedn>
+              <scope><%= node[:gads][:ldap][:users][:search][:scope] %></scope>
+              <filter><%= node[:gads][:ldap][:users][:search][:filter] %></filter>
+              <companyNameAttrName><%= node[:gads][:ldap][:users][:search][:attr][:company_name] %></companyNameAttrName>
+              <officeLocationAttrName><%= node[:gads][:ldap][:users][:search][:attr][:city] %></officeLocationAttrName>
+              <departmentAttrName><%= node[:gads][:ldap][:users][:search][:attr][:department] %></departmentAttrName>
+              <jobTitleAttrName><%= node[:gads][:ldap][:users][:search][:attr][:title] %></jobTitleAttrName>
+              <primaryEmailAddressAttrName><%= node[:gads][:ldap][:users][:search][:attr][:email] %></primaryEmailAddressAttrName>
+              <assistantAttrName><%= node[:gads][:ldap][:users][:search][:attr][:assistant] %></assistantAttrName>
+              <managerAttrName><%= node[:gads][:ldap][:users][:search][:attr][:manager] %></managerAttrName>
+              <workAddressStreetAttrName><%= node[:gads][:ldap][:users][:search][:attr][:street_address] %></workAddressStreetAttrName>
+              <workAddressPoboxAttrName><%= node[:gads][:ldap][:users][:search][:attr][:pobox] %></workAddressPoboxAttrName>
+              <workAddressCityAttrName><%= node[:gads][:ldap][:users][:search][:attr][:city] %></workAddressCityAttrName>
+              <workAddressStateAttrName><%= node[:gads][:ldap][:users][:search][:attr][:state] %></workAddressStateAttrName>
+              <workAddressPostalCodeAttrName><%= node[:gads][:ldap][:users][:search][:attr][:postal_code] %></workAddressPostalCodeAttrName>
+              <notesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:description] %></notesAttrName>
+              <employeeIdsAttrName><%= node[:gads][:ldap][:users][:search][:attr][:employee_id] %></employeeIdsAttrName>
+              <faxNumbersAttrName><%= node[:gads][:ldap][:users][:search][:attr][:fax] %></faxNumbersAttrName>
+              <homePhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:home_phone] %></homePhonesAttrName>
+              <mobilePhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:mobile_phone] %></mobilePhonesAttrName>
+              <workPhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:work_phone] %></workPhonesAttrName>
+            </search>
+          </userProfiles>
+          <calendarResources>
+            <search>
+              <priority>1</priority>
+            </search>
+          </calendarResources>
+          <mailingLists />
+        </config>
+      </plugin>
+    </local>
+  </plugins>
+</config>

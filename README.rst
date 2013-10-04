@@ -9,6 +9,7 @@ The ``gads::default`` cookbook will install the one dependency gem, ``greenlette
 **cookbooks**
 
 * java: Java is required to run Google App Directory Sync. The ``gads::default`` recipe installs using the default behavior. Include java in your runlist prior to gads if you want to change the install behavior.
+* run_once: run_once is used to ensure that the installer is only run if ``[:run_once][:gads][:installed]`` is not set or is ``false``.
 
 Attributes
 ----------
@@ -27,8 +28,6 @@ Attributes
 | ``[:gads][:synlinks_path]``                                     | String  | ``/usr/local/bin``                                                                       |
 +-----------------------------------------------------------------+---------+------------------------------------------------------------------------------------------+
 | ``[:gads][:config_path]``                                       | String  | ``/usr/local/etc/gads.xml``                                                              |
-+-----------------------------------------------------------------+---------+------------------------------------------------------------------------------------------+
-| ``[:gads][:config_version]``                                    | String  | ``3.1.6``                                                                                |
 +-----------------------------------------------------------------+---------+------------------------------------------------------------------------------------------+
 | ``[:gads][:features]``                                          | Array   | * CACHE_PASSWORD_TIMESTAMPS                                                              |
 |                                                                 |         | * ALIAS_SYNCHRONIZATION                                                                  |
@@ -257,13 +256,10 @@ Installation will toggle node attributes that control subsequent runs:
 +---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
 | Key                                         | Type    | Description                                                                                 | Value *   |
 +=============================================+=========+=============================================================================================+===========+
-| ``[:run_flags][:gads_installed]``           | Boolean | If true, will prevent gads from being re-downloaded and re-installed.                       | ``true``  |
-+---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
-| ``[:run_flags][:gads_passwords_encrypted]`` | Boolean | If true, will prevent the configuration template from updating and re-encrypting passwords. | ``true``  |
+| ``[:run_once][:gads][:installed]``          | Boolean | If true, will prevent gads from being re-downloaded and re-installed.                       | ``true``  |
 +---------------------------------------------+---------+---------------------------------------------------------------------------------------------+-----------+
 
-- If you update your password or configuration, you will need to set the ``[:run_flags][:gads_passwords_encrypted]`` value to ``false`` in the node attributes overrides for the configuration to be updated.
-- If you want to install a GADS version update, you will need to set the ``[:run_flags][:gads_installed]`` value to ``false`` to download and install the new version.
+- If you want to install a GADS version update, you will need to set the ``[:run_once][:gads][:installed]`` value to ``false`` to download and install the new version.
 
 License and Authors
 -------------------
