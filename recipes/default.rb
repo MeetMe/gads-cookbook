@@ -19,13 +19,13 @@ end
 
 # This is run if gads has previously been installed
 gads_config node[:gads][:config_path] do
-  only_if       {RunOnce.had_run?(:gads, :installed) && ::File.exists?(node[:gads][:config_path])}
+  only_if       {RunOnce.had_run?(node, :gads, :installed) && ::File.exists?(node[:gads][:config_path])}
   owner         'gads'
 end
 
 # Install GADS if it's not been installed yet
 gads_install node[:gads][:install_path] do
-  not_if         {RunOnce.had_run?(:gads, :installed)}
+  not_if         {RunOnce.had_run?(node, :gads, :installed)}
   owner          'gads'
   symlinks       node[:gads][:create_symlinks]
   symlinks_path  node[:gads][:symlinks_path]

@@ -18,7 +18,7 @@ action :install do
   shell_out!("chown -R #{new_resource.owner}:#{new_resource.group} #{new_resource.directory}")
 
   # Set the Run Flag indicating it was installed
-  RunOnce.ran(:gads, :installed)
+  RunOnce.ran(node, :gads, :installed)
 
   # Notify it was updated by last action
   new_resource.updated_by_last_action(true)
