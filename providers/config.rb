@@ -9,6 +9,7 @@ end
 
 private
 
+require 'tempfile'
 require 'chef/mixin/template'
 require 'chef/provider/template_finder'
 include Chef::Mixin::ShellOut
@@ -38,8 +39,8 @@ end
 
 def get_encrypted_passwords
   render_with_context(new_resource.template_finder.find('unencrypted.xml.erb')) do |rendered_template|
-    admin_encrypted = get_encrypted_value(rendered_template.path, 'encryptedAdminPassword')
-    ldap_encrypted = get_encrypted_value(rendered_template.path, 'authCredentialsEncrypted')
+    admin_encrypted = get_encrypted_value(rendered_template.path, node[:gads][:google][:admin_password])
+    ldap_encrypted = get_encrypted_value(rendered_template.path, node[:gads][:ldap][:auth_password])
     ::File.unlink(rendered_template.path)
     {:admin_password => admin_encrypted, :ldap_password => ldap_encrypted}
   end
@@ -54,14 +55,14 @@ module MonkeyProcess
   end
 end
 
-def get_encrypted_value(path, field)
+def get_encrypted_value(path, value)
   require 'greenletters'
 
   encrypted_value = nil
   encrypted_output = /Encrypted\svalue\s\(case\ssensitive,\splease\scut\sand paste\)\:\s([\w\S]+)/i
 
   ## Stupid monkeypatch to get around the fact that GADS encrypt-util hangs when trying to phone home for updates
-  encrypt = Greenletters::Process.new("#{node[:gads][:install_path]}/encrypt-util -c #{path}",
+  encrypt = Greenletters::Process.new("su gads -c '#{node[:gads][:install_path]}/encrypt-util -c #{path}'",
                                       :timeout => 10, :transcript => $stdout).extend(MonkeyProcess)
 
   encrypt.on(:output, encrypted_output) do |process, match_data|
@@ -71,17 +72,31 @@ def get_encrypted_value(path, field)
   end
   encrypt.start!
   encrypt.wait_for(:output, /Please enter the value to encrypt for the specified config/i)
-  encrypt << "#{field}\n"
+  encrypt << "#{value}\n"
   encrypt.wait_for(:exit)
   Chef::Log.debug("Encrypted value: #{encrypted_value}")
   encrypted_value
 end
 
 def render_with_context(template_location, &block)
-  context = {}
-  context.merge!({:config_hash => new_resource.config_hash,
-                  :gads_version => new_resource.gads_version})
-  context[:node] = node
-  context[:template_finder] = new_resource.template_finder
-  render_template(IO.read(template_location), context, &block)
+  if node[:chef_packages][:chef][:version][0,5].eql? '11.6.'
+    context = TemplateContext.new({:config_hash => new_resource.config_hash,
+                                   :gads_version => new_resource.gads_version})
+    context[:node] = node
+    context[:template_finder] = new_resource.template_finder
+    output = context.render_template(template_location)
+    Tempfile.open("chef-rendered-template") do |tempfile|
+      tempfile.print(output)
+      tempfile.close
+      ::File.chmod(0644, tempfile)
+      yield tempfile
+    end
+  elsif node[:chef_packages][:chef][:version][0,5].eql? '11.4.'
+    context = {}
+    context.merge!({:config_hash => new_resource.config_hash,
+                    :gads_version => new_resource.gads_version})
+    render_template(IO.read(template_location), context, &block)
+  else
+    Chef::Log.error("Could not render the temp file, unknown Chef version #{node[:chef_packages][:chef][:version0][0,5]}")
+  end
 end

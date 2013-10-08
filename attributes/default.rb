@@ -1,5 +1,5 @@
 # Installation Options
-default[:gads][:download_url] = 'http://dl.google.com/dirsync/dirsync-linux64.sh'
+default[:gads][:download_url] = 'http://dl.google.com/dirsync/google/googleappsdirsync_linux_64bit_3_2_1.sh'
 default[:gads][:create_symlinks] = true
 default[:gads][:install_path] = '/opt/GoogleAppsDirSync'
 default[:gads][:symlinks_path] = '/usr/local/bin'
@@ -97,7 +97,7 @@ default[:gads][:ldap][:groups][:search][:basedn] = "ou=Groups,#{node[:gads][:lda
 default[:gads][:ldap][:groups][:search][:scope] = 'SUBTREE'
 default[:gads][:ldap][:groups][:search][:filter] = 'objectClass=groupOfNames'
 default[:gads][:ldap][:groups][:search][:attr][:description] = 'description'
-default[:gads][:ldap][:groups][:search][:attr][:display_name] = 'cn'
+default[:gads][:ldap][:groups][:search][:attr][:display_name] = 'mailRoutingAddress'
 default[:gads][:ldap][:groups][:search][:attr][:member] = 'member'
 default[:gads][:ldap][:groups][:search][:attr][:name] = 'mailRoutingAddress'
 default[:gads][:ldap][:groups][:search][:attr][:owner_dn] = 'owner'
@@ -114,9 +114,9 @@ default[:gads][:ldap][:users][:search][:priority] = 1
 default[:gads][:ldap][:users][:search][:basedn] = "ou=People,#{node[:gads][:ldap][:basedn]}"
 default[:gads][:ldap][:users][:search][:suspended] = false
 default[:gads][:ldap][:users][:search][:scope] = 'SUBTREE'
-default[:gads][:ldap][:users][:search][:filter] = 'objectClass=organizationalUnit'
+default[:gads][:ldap][:users][:search][:filter] = 'objectClass=inetOrgPerson'
 default[:gads][:ldap][:users][:search][:attr][:org_mapping] = ''
-default[:gads][:ldap][:users][:search][:attr][:company_name] = 0
+default[:gads][:ldap][:users][:search][:attr][:company_name] = 'o'
 default[:gads][:ldap][:users][:search][:attr][:department] = 'department'
 default[:gads][:ldap][:users][:search][:attr][:title] = 'title'
 default[:gads][:ldap][:users][:search][:attr][:full_name] = 'displayName'
@@ -135,3 +135,4 @@ default[:gads][:ldap][:users][:search][:attr][:home_phone] = 'homePhone'
 default[:gads][:ldap][:users][:search][:attr][:mobile_phone] = 'mobile'
 default[:gads][:ldap][:users][:search][:attr][:work_phone] = 'telephoneNumber'
 default[:gads][:ldap][:users][:search][:attr][:description] = 'description'
+default[:gads][:ldap][:users][:search][:attr][:office_location] = 'physicalDeliveryOfficeName'

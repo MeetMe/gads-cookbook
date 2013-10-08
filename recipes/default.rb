@@ -19,7 +19,7 @@ end
 
 # This is run if gads has previously been installed
 gads_config node[:gads][:config_path] do
-  only_if       {RunOnce.had_run?(node, :gads, :installed) && ::File.exists?(node[:gads][:config_path])}
+  only_if       {RunOnce.had_run?(node, :gads, :installed)}
   owner         'gads'
 end
 
