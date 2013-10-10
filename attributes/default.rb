@@ -8,7 +8,6 @@ default[:gads][:config_path] = '/usr/local/etc/gads.xml'
 # Features
 default[:gads][:features] = %w[ALIAS_SYNCHRONIZATION
                                CACHE_PASSWORD_TIMESTAMPS
-                               DYNAMIC_GROUPS
                                FAMILY_NAME
                                GIVEN_NAME
                                GOOGLE_ORGUNITS
@@ -16,7 +15,6 @@ default[:gads][:features] = %w[ALIAS_SYNCHRONIZATION
                                GROUPS
                                GROUP_DESCRIPTION
                                GROUP_OWNER
-                               INDEPENDENT_GROUP_SYNC
                                MULTIDOMAIN
                                NON_ADDRESS_PRIMARY_KEY
                                SHA1_PASSWORD
