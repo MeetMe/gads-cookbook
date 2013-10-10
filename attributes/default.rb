@@ -6,22 +6,25 @@ default[:gads][:symlinks_path] = '/usr/local/bin'
 default[:gads][:config_path] = '/usr/local/etc/gads.xml'
 
 # Features
-default[:gads][:features] = %w[CACHE_PASSWORD_TIMESTAMPS
-                               ALIAS_SYNCHRONIZATION
-                               USER_PROFILES
-                               SKIP_CALENDAR_RESOURCES
-                               GROUP_DESCRIPTION
-                               GROUP_OWNER
-                               SUSPEND_USERS
-                               NON_ADDRESS_PRIMARY_KEY
-                               GOOGLE_ORGUNITS
-                               SHA1_PASSWORD
-                               MULTIDOMAIN
-                               SKIP_SUSPENDING_ADMINS
+default[:gads][:features] = %w[ALIAS_SYNCHRONIZATION
+                               CACHE_PASSWORD_TIMESTAMPS
+                               DYNAMIC_GROUPS
                                FAMILY_NAME
                                GIVEN_NAME
+                               GOOGLE_ORGUNITS
+                               GOOGLE_QUOTA
+                               GROUPS
+                               GROUP_DESCRIPTION
+                               GROUP_OWNER
+                               INDEPENDENT_GROUP_SYNC
+                               MULTIDOMAIN
+                               NON_ADDRESS_PRIMARY_KEY
+                               SHA1_PASSWORD
                                SHARED_CONTACTS
-                               GROUPS]
+                               SKIP_CALENDAR_RESOURCES
+                               SKIP_SUSPENDING_ADMINS
+                               SUSPEND_USERS
+                               USER_PROFILES]
 
 # Logging
 default[:gads][:logging][:file] = '/var/log/google/gads.log'
@@ -82,7 +85,6 @@ default[:gads][:ldap][:basedn] = 'dc=foo,dc=com'
 default[:gads][:ldap][:auth_type] = 'SIMPLE'
 default[:gads][:ldap][:auth_user] = 'cn=Manager,dc=foo,dc=com'
 default[:gads][:ldap][:auth_password] = 'bind dn password value'
-default[:gads][:ldap][:primary_key] = 'cn'
 default[:gads][:ldap][:attr][:email] = 'mail'
 default[:gads][:ldap][:attr][:email_alias] = 'mailLocalAddress'
 default[:gads][:ldap][:attr][:given_name] = 'givenName'
@@ -101,6 +103,7 @@ default[:gads][:ldap][:groups][:search][:attr][:display_name] = 'mailRoutingAddr
 default[:gads][:ldap][:groups][:search][:attr][:member] = 'member'
 default[:gads][:ldap][:groups][:search][:attr][:name] = 'mailRoutingAddress'
 default[:gads][:ldap][:groups][:search][:attr][:owner_dn] = 'owner'
+default[:gads][:ldap][:groups][:search][:attr][:user_email] = 'mail'
 
 default[:gads][:ldap][:orgunits][:mapping][:dn] = "ou=People,#{node[:gads][:ldap][:basedn]}"
 default[:gads][:ldap][:orgunits][:mapping][:name] = '/'

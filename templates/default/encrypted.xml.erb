@@ -42,8 +42,8 @@
           <googleUsersSyncThreads><%= node[:gads][:google][:threads][:user_sync] %></googleUsersSyncThreads>
           <googleProfilesSyncThreads><%= node[:gads][:google][:threads][:profile_sync] %></googleProfilesSyncThreads>
           <googleContactsSyncThreads><%= node[:gads][:google][:threads][:contact_sync] %></googleContactsSyncThreads>
-          <nonAddressPrimaryKeyMapFile>nonAddressPrimaryKeyFile.tsv</nonAddressPrimaryKeyMapFile>
-          <passwordTimestampFile>passwordTimestampCache.tsv</passwordTimestampFile>
+          <nonAddressPrimaryKeyMapFile><%= node[:gads][:install_path] %>/nonAddressPrimaryKeyFile.tsv</nonAddressPrimaryKeyMapFile>
+          <passwordTimestampFile><%= node[:gads][:install_path] %>/passwordTimestampCache.tsv</passwordTimestampFile>
           <% node[:gads][:google][:exclude].each do |entry| %>
           <exclude>
             <match><%= entry[:match] %></match>
@@ -66,7 +66,6 @@
           <authUser><%= node[:gads][:ldap][:auth_user] %></authUser>
           <authCredentialsEncrypted><%= @ldap_password %></authCredentialsEncrypted>
           <ldapCredMachineName><%= node[:fqdn] %></ldapCredMachineName>
-          <nonAddressPrimaryKeyAttrName><%= node[:gads][:ldap][:primary_key] %></nonAddressPrimaryKeyAttrName>
           <emailAttrName><%= node[:gads][:ldap][:attr][:email] %></emailAttrName>
           <aliasAttrName><%= node[:gads][:ldap][:attr][:email_alias] %></aliasAttrName>
           <givenNameAttrName><%= node[:gads][:ldap][:attr][:given_name] %></givenNameAttrName>
@@ -110,6 +109,7 @@
               <groupDisplayNameAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:display_name] %></groupDisplayNameAttribute>
               <groupDescriptionAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:description] %></groupDescriptionAttribute>
               <ownerDnAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:owner_dn] %></ownerDnAttribute>
+              <userEmailAttribute><%= node[:gads][:ldap][:groups][:search][:attr][:user_email] %></userEmailAttribute>
             </search>
           </groups>
           <sharedContacts>
@@ -165,11 +165,7 @@
               <workPhonesAttrName><%= node[:gads][:ldap][:users][:search][:attr][:work_phone] %></workPhonesAttrName>
             </search>
           </userProfiles>
-          <calendarResources>
-            <search>
-              <priority>1</priority>
-            </search>
-          </calendarResources>
+          <calendarResources />
           <mailingLists />
         </config>
       </plugin>
