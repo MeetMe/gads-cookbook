@@ -99,7 +99,7 @@ default[:gads][:ldap][:groups][:search][:basedn] = "ou=Groups,#{node[:gads][:lda
 default[:gads][:ldap][:groups][:search][:scope] = 'SUBTREE'
 default[:gads][:ldap][:groups][:search][:filter] = 'objectClass=groupOfNames'
 default[:gads][:ldap][:groups][:search][:attr][:description] = 'description'
-default[:gads][:ldap][:groups][:search][:attr][:display_name] = 'mailRoutingAddress'
+default[:gads][:ldap][:groups][:search][:attr][:display_name] = 'cn'
 default[:gads][:ldap][:groups][:search][:attr][:member] = 'member'
 default[:gads][:ldap][:groups][:search][:attr][:name] = 'mailRoutingAddress'
 default[:gads][:ldap][:groups][:search][:attr][:owner_dn] = 'owner'
